@@ -161,7 +161,7 @@ export default function DeadlockSim() {
   const steps = useMemo(() => {
     if (!matrices || !result) return [];
     const { alloc, avail } = matrices;
-    let work = [...avail];
+    const work = [...avail];
     const seq = result.sequence;
     const seqSteps: number[][] = [[...work]];
 

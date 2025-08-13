@@ -68,9 +68,9 @@ export default function BankersPanel() {
   // If we have a result & matrices, build step‐by‐step Work progression
   const steps = useMemo(() => {
     if (!matrices || !result) return [];
-    const { alloc, need } = matrices;
+    const { alloc } = matrices;
     const workSequence: number[][] = [];
-    let work = [...matrices.avail];
+    const work = [...matrices.avail];
     const finished = Array(matrices.alloc.length).fill(false);
 
     for (const pid of result.sequence) {

@@ -19,7 +19,7 @@ import { useEffect } from "react";
 const ProcessSchema = z.object({
   arrival_time: z.coerce.number().min(0).lte(100),
   burst_time: z.coerce.number().min(1).lte(100),
-  // leave priority out if not shown
+  priority: z.coerce.number().min(1).lte(10).optional(),
   background: z.string().nonempty(),
 });
 
@@ -60,7 +60,7 @@ export function ProcessForm({
     if (initialValues) {
       form.reset({ ...form.getValues(), ...initialValues });
     }
-  }, [initialValues]);
+  }, [initialValues, form]);
 
   const onSubmit = (data: z.infer<typeof schema>) => {
     addProcess(data as ProcessFormValues);
@@ -109,7 +109,7 @@ export function ProcessForm({
         {showPriority && (
           <FormField
             control={form.control}
-            name={"priority" as any} // workaround for conditional schema
+            name="priority"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Priority (1–10)</FormLabel>
